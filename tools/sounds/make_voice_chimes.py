@@ -29,6 +29,12 @@ LINES = {
                 (5, 0.07, 0), (4, 0.07, 0), (9, 0.11, 0), (7, 0.3, -2)],
     # "Back to you, partner!"
     "voice-5": [(4, 0.11, 0), (5, 0.07, 0), (9, 0.2, 1), "pause", (7, 0.12, 0), (12, 0.3, -1)],
+    # "Happy Birthday to you!" sung on the melody's opening phrase (sol sol la sol do ti)
+    "birthday": [(2, 0.16, 0), (2, 0.07, 0), (4, 0.24, 0), (2, 0.24, 0), (7, 0.24, 0), (6, 0.48, 0)],
+    # "Should auld acquaintance be forgot, and never brought to mind" (Auld Lang Syne, New Year)
+    "new-year": [(-3, 0.22, 0), (2, 0.33, 0), (2, 0.11, 0), (2, 0.22, 0), (6, 0.22, 0),
+                 (4, 0.33, 0), (2, 0.11, 0), (4, 0.22, 0), (6, 0.22, 0),
+                 (2, 0.33, 0), (2, 0.11, 0), (6, 0.22, 0), (9, 0.22, 0), (11, 0.55, 0)],
 }
 
 
