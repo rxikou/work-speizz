@@ -1,0 +1,6 @@
+{
+  "mods": [
+    { "plugin": "prismantis@prismantis", "marketplace": "NahumLitvin/prismantis" },
+    { "plugin": "filetree@claude-code-filetree", "marketplace": "data-goblin/claude-code-filetree" }
+  ]
+}
