@@ -2,6 +2,8 @@
 #   1. Backs up ~/.claude/settings.json, then merges setup/settings.json into it
 #      (objects merge, lists are combined, your other keys are kept).
 #   2. Adds this repo as a plugin marketplace and installs every mod in it.
+#   3. Installs the linked third-party plugins in setup/settings.json (ECC,
+#      Prismantis) from their own marketplaces.
 #
 # Usage:  powershell -ExecutionPolicy Bypass -File scripts\install.ps1 [-SkipSettings] [-SkipMods]
 
@@ -54,6 +56,22 @@ if (-not $SkipMods) {
     foreach ($mod in $market.plugins) {
         Write-Host "Installing $($mod.name)..."
         claude plugin install "$($mod.name)@work-speizz"
+    }
+
+    # Linked third-party plugins (see Credits in the README): add each one's own
+    # marketplace and install it from there, straight from its author's repo.
+    $settings = Get-Content (Join-Path $repo 'setup\settings.json') -Raw | ConvertFrom-Json
+    foreach ($m in $settings.extraKnownMarketplaces.PSObject.Properties) {
+        $src = $m.Value.source
+        $from = if ($src.repo) { $src.repo } else { $src.url }
+        Write-Host "Adding marketplace $($m.Name)..."
+        claude plugin marketplace add $from
+    }
+    foreach ($p in $settings.enabledPlugins.PSObject.Properties) {
+        if ($p.Value -and -not $p.Name.EndsWith('@work-speizz')) {
+            Write-Host "Installing $($p.Name)..."
+            claude plugin install $p.Name
+        }
     }
 }
 
