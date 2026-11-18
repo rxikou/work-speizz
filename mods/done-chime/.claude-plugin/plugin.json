@@ -1,0 +1,6 @@
+{
+  "name": "done-chime",
+  "version": "0.2.0",
+  "description": "A soft pixel 'sprite' chirps a random voice line whenever Claude finishes a task.",
+  "license": "MIT"
+}
