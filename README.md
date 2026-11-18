@@ -22,7 +22,7 @@ One repo to make any machine, and any project, feel like home.
 
 ---
 
-## 🚀 Quick start
+##  Quick start
 
 ```bash
 git clone https://github.com/rxikou/work-speizz.git
