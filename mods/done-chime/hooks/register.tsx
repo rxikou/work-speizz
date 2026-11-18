@@ -31,7 +31,13 @@ const CHIMES: Sound[] = [
   { file: 'whoosh-ding', label: 'Whoosh-ding', hotkey: 'k' },
 ]
 
-const ALL: Sound[] = [...VOICES, ...CHIRPS, ...CHIMES]
+// Sung lines: on the board only, never in the random finish pick.
+const SONGS: Sound[] = [
+  { file: 'birthday', label: '"Happy Birthday to you!"', hotkey: '6' },
+  { file: 'new-year', label: 'New Year · "Auld Lang Syne"', hotkey: '7' },
+]
+
+const ALL: Sound[] = [...VOICES, ...SONGS, ...CHIRPS, ...CHIMES]
 const randomVoice = () => VOICES[Math.floor(Math.random() * VOICES.length)] ?? VOICES[0]!
 
 const PANE = 'sprite-sounds'
@@ -48,7 +54,7 @@ export const register: Register = on => {
   })
 
   on('command.run', { command: 'sounds' }, async $ => {
-    await $.ui.open({ id: PANE, title: 'Sprite sounds', focus: true, closeOnEscape: true, rows: 17 })
+    await $.ui.open({ id: PANE, title: 'Sprite sounds', focus: true, closeOnEscape: true, rows: 21 })
 
     return { text: 'Sprite sound board opened.' }
   })
@@ -107,6 +113,10 @@ export const register: Register = on => {
         {VOICES.map((s, i) => button(s, i === 0))}
         <Text> </Text>
 
+        <Text bold>Songs</Text>
+        {SONGS.map(s => button(s))}
+        <Text> </Text>
+
         <Text bold>Sprite chirps</Text>
         <Box flexDirection="row" flexWrap="wrap" columnGap={3}>{CHIRPS.map(s => button(s))}</Box>
         <Text bold>Chimes</Text>
@@ -117,7 +127,7 @@ export const register: Register = on => {
           <Button key="random" plain hotkey="r" onPress={() => press(randomVoice())()}>Random voice</Button>
           <Button key="close" plain hotkey="q" role="dismiss" onPress={() => $.ui.close({ id: PANE })}>Close</Button>
         </Box>
-        <Text dimColor>↑↓ ←→ / Tab move · Enter play · 1-5, a-k quick play · Esc or q close</Text>
+        <Text dimColor>↑↓ ←→ / Tab move · Enter play · 1-7, a-k quick play · Esc or q close</Text>
       </Box>
     )
   })
