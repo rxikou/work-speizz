@@ -31,8 +31,14 @@ Answer `y` to add the marketplace, then pick a scope.
 - **macOS**: played by Claude Code's own player (`afplay`).
 - **Linux**: Claude Code's terminal has no clip player there, so it stays silent.
 
+## Sound board
+
+Type `/sounds` to open an inline panel listing every sound. Press `1`–`5` for the
+voice lines, `a`–`k` for the other sounds (or click one); `▶` marks what's playing,
+and `Esc` closes the panel.
+
 ## Changing the sound
 
 Other clips live in `sounds/` (`sprite-1..4`, `chime`, `bell`, `arpeggio`, `pop`,
-`marimba`, `retro`, `whoosh-ding`). Edit `VOICES` in `hooks/register.ts` to choose
+`marimba`, `retro`, `whoosh-ding`). Edit `VOICES` in `hooks/register.tsx` to choose
 which ones it picks from.
