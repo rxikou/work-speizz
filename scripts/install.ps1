@@ -3,7 +3,7 @@
 #      (objects merge, lists are combined, your other keys are kept).
 #   2. Adds this repo as a plugin marketplace and installs every mod in it.
 #   3. Installs the linked third-party plugins in setup/settings.json (ECC,
-#      Prismantis) from their own marketplaces.
+#      Prismantis, Filetree) from their own marketplaces.
 #
 # Usage:  powershell -ExecutionPolicy Bypass -File scripts\install.ps1 [-SkipSettings] [-SkipMods]
 
