@@ -1,6 +1,6 @@
 {
   "name": "done-chime",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "description": "A soft pixel 'sprite' chirps a random voice line whenever Claude finishes a task; /sounds opens a sound board.",
   "license": "MIT",
   "types": "./types/index.d.ts"

@@ -35,6 +35,42 @@ test('the board lists every sound and a press plays it', async ($, on) => {
   await ui.unmount()
 })
 
+test('the first voice line takes the focus ring, so arrows + Enter work at once', async ($, on) => {
+  on('session.info', () => ({ value: { platform: 'macos', isHosted: false } as never }))
+
+  const ui = await $.ui.mount({ ...PANE, surface: 'terminal' })
+
+  expect((await ui.find({ type: 'Button', key: 'voice-1' }))?.props.autoFocus).toBe(true)
+  expect((await ui.find({ type: 'Button', key: 'voice-2' }))?.props.autoFocus).toBeUndefined()
+  await ui.unmount()
+})
+
+test('Random plays a voice line and Close closes the board', async ($, on) => {
+  const played: string[] = []
+  const closed: string[] = []
+  on('session.info', () => ({ value: { platform: 'macos', isHosted: false } as never }))
+  on('audio.play', (_, e) => {
+    if (e.clip.asset) played.push(e.clip.asset)
+
+    return { value: undefined }
+  })
+  on('ui.close', (_, e) => {
+    closed.push(e.id)
+
+    return { value: undefined } as never
+  })
+
+  const ui = await $.ui.mount({ ...PANE, surface: 'terminal' })
+
+  await ui.press({ key: 'random' })
+  expect(played.length).toBe(1)
+  expect(played[0]).toMatch(/^sounds\/voice-[1-5]\.wav$/)
+
+  await ui.press({ key: 'close' })
+  expect(closed).toEqual(['sprite-sounds'])
+  await ui.unmount()
+})
+
 test('a finished main turn plays one voice line; a subagent turn plays none', async ($, on) => {
   const played: string[] = []
   on('session.info', () => ({ value: { platform: 'macos', isHosted: false } as never }))

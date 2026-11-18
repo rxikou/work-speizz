@@ -13,10 +13,26 @@ const VOICES: Sound[] = [
   { file: 'voice-5', label: '"Back to you, partner!"', hotkey: '5' },
 ]
 
-const OTHERS: Sound[] = [
-  'sprite-1', 'sprite-2', 'sprite-3', 'sprite-4', 'chime', 'bell',
-  'arpeggio', 'pop', 'marimba', 'retro', 'whoosh-ding',
-].map((file, i) => ({ file, label: file, hotkey: 'abcdefghijk'[i] ?? 'a' }))
+// Short sprite chirps, then the plain chimes.
+const CHIRPS: Sound[] = [
+  { file: 'sprite-1', label: 'Sprite 1', hotkey: 'a' },
+  { file: 'sprite-2', label: 'Sprite 2', hotkey: 'b' },
+  { file: 'sprite-3', label: 'Sprite 3', hotkey: 'c' },
+  { file: 'sprite-4', label: 'Sprite 4', hotkey: 'd' },
+]
+
+const CHIMES: Sound[] = [
+  { file: 'chime', label: 'Chime', hotkey: 'e' },
+  { file: 'bell', label: 'Bell', hotkey: 'f' },
+  { file: 'arpeggio', label: 'Arpeggio', hotkey: 'g' },
+  { file: 'pop', label: 'Pop', hotkey: 'h' },
+  { file: 'marimba', label: 'Marimba', hotkey: 'i' },
+  { file: 'retro', label: 'Retro', hotkey: 'j' },
+  { file: 'whoosh-ding', label: 'Whoosh-ding', hotkey: 'k' },
+]
+
+const ALL: Sound[] = [...VOICES, ...CHIRPS, ...CHIMES]
+const randomVoice = () => VOICES[Math.floor(Math.random() * VOICES.length)] ?? VOICES[0]!
 
 const PANE = 'sprite-sounds'
 const nowPlaying = atom({ plugin: 'done-chime', key: 'nowPlaying' } as const, null)
@@ -32,7 +48,7 @@ export const register: Register = on => {
   })
 
   on('command.run', { command: 'sounds' }, async $ => {
-    await $.ui.open({ id: PANE, title: 'Sprite sounds', focus: true, closeOnEscape: true, rows: 14 })
+    await $.ui.open({ id: PANE, title: 'Sprite sounds', focus: true, closeOnEscape: true, rows: 17 })
 
     return { text: 'Sprite sound board opened.' }
   })
@@ -42,8 +58,7 @@ export const register: Register = on => {
 
     // Only the main conversation's turns, and not ones you interrupted.
     if (e.agentId === undefined && !e.isAborted) {
-      const pick = VOICES[Math.floor(Math.random() * VOICES.length)] ?? VOICES[0]
-      if (pick) void playFile($, pick.file).catch(err => $.ui.log(`done-chime: ${String(err)}`, { to: 'debug' }))
+      void playFile($, randomVoice().file).catch(err => $.ui.log(`done-chime: ${String(err)}`, { to: 'debug' }))
     }
 
     return done
@@ -63,24 +78,46 @@ export const register: Register = on => {
       await update($, nowPlaying, cur => (cur === s.file ? null : cur))
     }
 
-    const row = (s: Sound) => (
-      <Button key={s.file} plain hotkey={s.hotkey} onPress={press(s)}>
-        {playing === s.file ? '▶ ' : '  '}
+    // The first voice line takes the focus ring, so arrows/Tab + Enter work at once.
+    const button = (s: Sound, first = false) => (
+      <Button
+        key={s.file}
+        plain
+        hotkey={s.hotkey}
+        autoFocus={first ? true : undefined}
+        dimColor={playing !== null && playing !== s.file}
+        onPress={press(s)}
+      >
+        {playing === s.file ? '♪ ' : ''}
         {s.label}
       </Button>
     )
 
+    const now = ALL.find(s => s.file === playing)
+
     return (
       <Box flexDirection="column">
-        <Text bold>Voice lines <Text dimColor>(one plays at random when Claude finishes)</Text></Text>
-        {VOICES.map(row)}
-        <Text> </Text>
-        <Text bold>Other sounds</Text>
-        <Box flexDirection="row" flexWrap="wrap" columnGap={2}>
-          {OTHERS.map(row)}
+        <Box flexDirection="row" justifyContent="space-between">
+          <Text bold color="claude">▚▞ Sprite sound board</Text>
+          {now ? <Text color="claude">♪ {now.label}</Text> : <Text dimColor>idle</Text>}
         </Box>
         <Text> </Text>
-        <Text dimColor>Press a key or click to play · Esc closes</Text>
+
+        <Text bold>Voice lines <Text dimColor>· one plays at random when Claude finishes</Text></Text>
+        {VOICES.map((s, i) => button(s, i === 0))}
+        <Text> </Text>
+
+        <Text bold>Sprite chirps</Text>
+        <Box flexDirection="row" flexWrap="wrap" columnGap={3}>{CHIRPS.map(s => button(s))}</Box>
+        <Text bold>Chimes</Text>
+        <Box flexDirection="row" flexWrap="wrap" columnGap={3}>{CHIMES.map(s => button(s))}</Box>
+        <Text> </Text>
+
+        <Box flexDirection="row" columnGap={3}>
+          <Button key="random" plain hotkey="r" onPress={() => press(randomVoice())()}>Random voice</Button>
+          <Button key="close" plain hotkey="q" role="dismiss" onPress={() => $.ui.close({ id: PANE })}>Close</Button>
+        </Box>
+        <Text dimColor>↑↓ ←→ / Tab move · Enter play · 1-5, a-k quick play · Esc or q close</Text>
       </Box>
     )
   })
