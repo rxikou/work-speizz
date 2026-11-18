@@ -1,0 +1,11 @@
+# Engine-generated type folders for mods
+.claude-plugin/types/
+**/.claude-plugin/types/
+
+# OS / editor / Python noise
+.DS_Store
+Thumbs.db
+*.log
+__pycache__/
+.vscode/
+.idea/
