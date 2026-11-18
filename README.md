@@ -39,7 +39,7 @@ The installer:
 1. **Backs up** `~/.claude/settings.json`.
 2. **Merges** [`setup/settings.json`](setup/settings.json) into it, keeping anything else you have.
 3. **Installs** every mod listed in the marketplace.
-4. **Installs** the linked third-party plugins (ECC, Prismantis) from their authors' own marketplaces.
+4. **Installs** the linked third-party plugins (ECC, Prismantis, Filetree) from their authors' own marketplaces.
 
 > [!TIP]
 > To run only one half, use `-SkipSettings` / `-SkipMods` on Windows or
@@ -74,7 +74,8 @@ Each mod's folder has its own README with setup and details.
 -  No `Co-Authored-By: Claude` line on commits.
 -  Claude may not open or merge pull requests (`gh pr create` / `gh pr merge` are denied).
 -  Opus at high effort, with the [ECC](https://github.com/affaan-m/ECC) plugin.
--  [Prismantis](https://github.com/NahumLitvin/prismantis) for colorful, themeable replies.
+-  [Prismantis](https://github.com/NahumLitvin/prismantis) for colorful, themeable replies (Tokyo Night theme, boxed tables, framed prompt, copy buttons).
+-  [Filetree](https://github.com/data-goblin/claude-code-filetree) side pane showing the project tree with git status and the files Claude touches, in a matching Tokyo Night palette.
 -  Dark daltonized theme, with notifications on.
 
 ##  Repo layout
@@ -115,6 +116,7 @@ and licenses stay with them.
 | --- | --- | --- | --- |
 | [ECC](https://github.com/affaan-m/ECC) | [@affaan-m](https://github.com/affaan-m) | MIT | Linked: added as a marketplace and enabled in [`setup/settings.json`](setup/settings.json) |
 | [Prismantis](https://github.com/NahumLitvin/prismantis) | Nahum Litvin ([@NahumLitvin](https://github.com/NahumLitvin)) | MIT | Linked: colorful, themeable replies, installed from its own marketplace via [`setup/settings.json`](setup/settings.json) |
+| [Filetree](https://github.com/data-goblin/claude-code-filetree) | Kurt Buhler ([@data-goblin](https://github.com/data-goblin)) | MIT | Linked: IDE-style file tree pane, installed from its own marketplace via [`setup/settings.json`](setup/settings.json) |
 
 <details>
 <summary><b>Adding someone else's plugin</b></summary>
