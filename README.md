@@ -60,24 +60,24 @@ Answer `y` to add the marketplace, then pick a scope.
 
 </details>
 
-## 🧩 Mods
+##  Mods
 
 | Mod | What it does |
 | --- | --- |
-| 🔔 [**done-chime**](mods/done-chime/) | A soft pixel "sprite" chirps a random voice line whenever Claude finishes a task. `/sounds` opens a sound board. |
-| 🛡️ [**account-guard**](mods/account-guard/) | Blocks Claude's `git commit` / `push` when the git identity doesn't match the repo's GitHub owner, so work and personal accounts never mix. |
+| [**done-chime**](mods/done-chime/) | A soft pixel "sprite" chirps a random voice line whenever Claude finishes a task. `/sounds` opens a sound board. |
+| [**account-guard**](mods/account-guard/) | Blocks Claude's `git commit` / `push` when the git identity doesn't match the repo's GitHub owner, so work and personal accounts never mix. |
 
 Each mod's folder has its own README with setup and details.
 
 ## ⚙️ Settings highlights
 
-- 🚫 No `Co-Authored-By: Claude` line on commits.
-- 🔒 Claude may not open or merge pull requests (`gh pr create` / `gh pr merge` are denied).
-- 🧠 Opus at high effort, with the [ECC](https://github.com/affaan-m/ECC) plugin.
-- 🌈 [Prismantis](https://github.com/NahumLitvin/prismantis) for colorful, themeable replies.
-- 🎨 Dark daltonized theme, with notifications on.
+-  No `Co-Authored-By: Claude` line on commits.
+-  Claude may not open or merge pull requests (`gh pr create` / `gh pr merge` are denied).
+-  Opus at high effort, with the [ECC](https://github.com/affaan-m/ECC) plugin.
+-  [Prismantis](https://github.com/NahumLitvin/prismantis) for colorful, themeable replies.
+-  Dark daltonized theme, with notifications on.
 
-## 📁 Repo layout
+##  Repo layout
 
 ```
 work-speizz/
@@ -90,7 +90,7 @@ work-speizz/
 └── tools/sounds/                     # generators for the mods' original, synthesized sounds
 ```
 
-## 🛠️ Add a new mod
+##  Add a new mod
 
 1. Put it in `mods/<name>/` with its `.claude-plugin/plugin.json`.
 2. Register it in `.claude-plugin/marketplace.json`:
@@ -105,7 +105,7 @@ work-speizz/
    claude plugin validate mods/<name>
    ```
 
-## 🙏 Credits
+##  Credits
 
 This setup builds on other people's work. Third-party plugins are **linked, not
 copied**: they install straight from their authors' repos, so their code, updates
