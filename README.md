@@ -69,7 +69,7 @@ Answer `y` to add the marketplace, then pick a scope.
 
 Each mod's folder has its own README with setup and details.
 
-## ⚙️ Settings highlights
+##  Settings highlights
 
 -  No `Co-Authored-By: Claude` line on commits.
 -  Claude may not open or merge pull requests (`gh pr create` / `gh pr merge` are denied).
