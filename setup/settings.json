@@ -10,7 +10,8 @@
   "effortLevel": "high",
   "enabledPlugins": {
     "ecc@ecc": true,
-    "prismantis@prismantis": true
+    "prismantis@prismantis": true,
+    "filetree@claude-code-filetree": true
   },
   "extraKnownMarketplaces": {
     "ecc": {
@@ -24,6 +25,12 @@
         "source": "github",
         "repo": "NahumLitvin/prismantis"
       }
+    },
+    "claude-code-filetree": {
+      "source": {
+        "source": "github",
+        "repo": "data-goblin/claude-code-filetree"
+      }
     }
   },
   "pluginConfigs": {
@@ -31,6 +38,22 @@
       "options": {
         "hooks_enabled": true,
         "hook_profile": "standard"
+      }
+    },
+    "prismantis@prismantis": {
+      "options": {
+        "theme": "tokyo-night",
+        "desktopColors": "off",
+        "tableStyle": "box",
+        "copyButtonStyle": "dim",
+        "copyButtons": true,
+        "textCopyButtons": true,
+        "promptStyle": "framed"
+      }
+    },
+    "filetree@claude-code-filetree": {
+      "options": {
+        "palette": "fg=#c0caf5 accent=#7aa2f7 muted=#737aa2 urgent=#f7768e selection=#283457 hover=#292e42 jump=#bb9af7 added=#9ece6a modified=#e0af68 renamed=#7dcfff add=#9ece6a del=#f7768e"
       }
     }
   },
