@@ -1,51 +1,52 @@
+<div align="center">
+
 # work-speizz
-My personal Claude Code arsenal of configs and workflow mods.
 
-One repo to make any machine, and any project, feel like home: my Claude Code
-settings, plus small mods that make the day-to-day smoother.
+**My personal Claude Code arsenal of configs and workflow mods.**
 
-## What's inside
+One repo to make any machine, and any project, feel like home.
 
-| Path | What it is |
-| --- | --- |
-| [`mods/`](mods/) | Claude Code mods, each a self-contained plugin |
-| [`setup/settings.json`](setup/settings.json) | My baseline Claude Code settings |
-| [`scripts/`](scripts/) | One-shot installers for Windows and macOS/Linux |
-| [`tools/sounds/`](tools/sounds/) | Generators for the mods' (original, synthesized) sounds |
-| [`.claude-plugin/marketplace.json`](.claude-plugin/marketplace.json) | Makes this repo a plugin marketplace |
+[![License: MIT](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
+[![Claude Code](https://img.shields.io/badge/Claude%20Code-plugin%20marketplace-D97757)](.claude-plugin/marketplace.json)
+![Platforms](https://img.shields.io/badge/platforms-Windows%20%7C%20macOS%20%7C%20Linux-blue)
+![Mods](https://img.shields.io/badge/mods-2-8A63D2)
 
-### Mods
+[Quick start](#-quick-start) •
+[Mods](#-mods) •
+[Settings](#%EF%B8%8F-settings-highlights) •
+[Repo layout](#-repo-layout) •
+[Add a mod](#%EF%B8%8F-add-a-new-mod)
 
-| Mod | Does |
-| --- | --- |
-| [done-chime](mods/done-chime/) | A soft pixel "sprite" chirps a random voice line whenever Claude finishes a task; `/sounds` opens a sound board |
-| [account-guard](mods/account-guard/) | Blocks Claude's `git commit`/`push` when the identity doesn't match the repo's GitHub owner, so work and personal accounts never mix |
+</div>
 
-### Settings highlights
+---
 
-- No `Co-Authored-By: Claude` line on commits.
-- Claude may not open or merge pull requests (`gh pr create` / `gh pr merge` are denied).
-- Opus at high effort, the [ECC](https://github.com/affaan-m/ECC) plugin, dark daltonized theme, notifications on.
+## 🚀 Quick start
 
-## Set up a machine
-
-```
+```bash
 git clone https://github.com/rxikou/work-speizz.git
 cd work-speizz
-
-# Windows
-powershell -ExecutionPolicy Bypass -File scripts\install.ps1
-
-# macOS / Linux / WSL
-bash scripts/install.sh
 ```
 
-The script backs up `~/.claude/settings.json`, merges `setup/settings.json` into it
-(keeping anything else you have), then installs every mod listed in the
-marketplace. Use `-SkipSettings` / `-SkipMods` (or `--skip-settings` /
-`--skip-mods`) to do just one half.
+| Platform | Command |
+| --- | --- |
+| Windows | `powershell -ExecutionPolicy Bypass -File scripts\install.ps1` |
+| macOS / Linux / WSL | `bash scripts/install.sh` |
 
-## Install a single mod
+The installer:
+
+1. **Backs up** `~/.claude/settings.json`.
+2. **Merges** [`setup/settings.json`](setup/settings.json) into it, keeping anything else you have.
+3. **Installs** every mod listed in the marketplace.
+
+> [!TIP]
+> To run only one half, use `-SkipSettings` / `-SkipMods` on Windows or
+> `--skip-settings` / `--skip-mods` on macOS/Linux.
+
+<details>
+<summary><b>Install a single mod instead</b></summary>
+
+<br>
 
 At a Claude Code prompt:
 
@@ -55,13 +56,56 @@ At a Claude Code prompt:
 
 Answer `y` to add the marketplace, then pick a scope.
 
-## Add a new mod
+</details>
+
+## 🧩 Mods
+
+| Mod | What it does |
+| --- | --- |
+| 🔔 [**done-chime**](mods/done-chime/) | A soft pixel "sprite" chirps a random voice line whenever Claude finishes a task. `/sounds` opens a sound board. |
+| 🛡️ [**account-guard**](mods/account-guard/) | Blocks Claude's `git commit` / `push` when the git identity doesn't match the repo's GitHub owner, so work and personal accounts never mix. |
+
+Each mod's folder has its own README with setup and details.
+
+## ⚙️ Settings highlights
+
+- 🚫 No `Co-Authored-By: Claude` line on commits.
+- 🔒 Claude may not open or merge pull requests (`gh pr create` / `gh pr merge` are denied).
+- 🧠 Opus at high effort, with the [ECC](https://github.com/affaan-m/ECC) plugin.
+- 🎨 Dark daltonized theme, with notifications on.
+
+## 📁 Repo layout
+
+```
+work-speizz/
+├── .claude-plugin/marketplace.json   # makes this repo a plugin marketplace
+├── mods/                             # Claude Code mods, each a self-contained plugin
+│   ├── done-chime/
+│   └── account-guard/
+├── setup/settings.json               # baseline Claude Code settings
+├── scripts/                          # one-shot installers (install.ps1, install.sh)
+└── tools/sounds/                     # generators for the mods' original, synthesized sounds
+```
+
+## 🛠️ Add a new mod
 
 1. Put it in `mods/<name>/` with its `.claude-plugin/plugin.json`.
-2. Add `{ "name": "<name>", "source": "./mods/<name>" }` to `plugins` in
-   `.claude-plugin/marketplace.json`.
-3. Check it: `claude plugin validate mods/<name>`.
+2. Register it in `.claude-plugin/marketplace.json`:
 
-## License
+   ```json
+   { "name": "<name>", "source": "./mods/<name>" }
+   ```
 
-[MIT](LICENSE)
+3. Validate it:
+
+   ```
+   claude plugin validate mods/<name>
+   ```
+
+---
+
+<div align="center">
+
+Released under the [MIT License](LICENSE).
+
+</div>
