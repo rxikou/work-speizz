@@ -15,7 +15,8 @@ One repo to make any machine, and any project, feel like home.
 [Mods](#-mods) •
 [Settings](#%EF%B8%8F-settings-highlights) •
 [Repo layout](#-repo-layout) •
-[Add a mod](#%EF%B8%8F-add-a-new-mod)
+[Add a mod](#%EF%B8%8F-add-a-new-mod) •
+[Credits](#-credits)
 
 </div>
 
@@ -38,6 +39,7 @@ The installer:
 1. **Backs up** `~/.claude/settings.json`.
 2. **Merges** [`setup/settings.json`](setup/settings.json) into it, keeping anything else you have.
 3. **Installs** every mod listed in the marketplace.
+4. **Installs** the linked third-party plugins (ECC, Prismantis) from their authors' own marketplaces.
 
 > [!TIP]
 > To run only one half, use `-SkipSettings` / `-SkipMods` on Windows or
@@ -72,6 +74,7 @@ Each mod's folder has its own README with setup and details.
 - 🚫 No `Co-Authored-By: Claude` line on commits.
 - 🔒 Claude may not open or merge pull requests (`gh pr create` / `gh pr merge` are denied).
 - 🧠 Opus at high effort, with the [ECC](https://github.com/affaan-m/ECC) plugin.
+- 🌈 [Prismantis](https://github.com/NahumLitvin/prismantis) for colorful, themeable replies.
 - 🎨 Dark daltonized theme, with notifications on.
 
 ## 📁 Repo layout
@@ -102,10 +105,36 @@ work-speizz/
    claude plugin validate mods/<name>
    ```
 
+## 🙏 Credits
+
+This setup builds on other people's work. Third-party plugins are **linked, not
+copied**: they install straight from their authors' repos, so their code, updates
+and licenses stay with them.
+
+| Project | Author | License | How it's used |
+| --- | --- | --- | --- |
+| [ECC](https://github.com/affaan-m/ECC) | [@affaan-m](https://github.com/affaan-m) | MIT | Linked: added as a marketplace and enabled in [`setup/settings.json`](setup/settings.json) |
+| [Prismantis](https://github.com/NahumLitvin/prismantis) | Nahum Litvin ([@NahumLitvin](https://github.com/NahumLitvin)) | MIT | Linked: colorful, themeable replies, installed from its own marketplace via [`setup/settings.json`](setup/settings.json) |
+
+<details>
+<summary><b>Adding someone else's plugin</b></summary>
+
+<br>
+
+1. Check its license. Without one, link to it only and never copy it in.
+2. Link it: add its marketplace to `extraKnownMarketplaces` and the plugin to
+   `enabledPlugins` in `setup/settings.json`.
+3. Add a row to the table above: name, author, license, how it's used.
+4. If you ever **copy** code in instead, keep its `LICENSE` in that folder, keep the
+   author in its `plugin.json`, and list it in a `THIRD_PARTY_NOTICES.md`.
+
+</details>
+
 ---
 
 <div align="center">
 
-Released under the [MIT License](LICENSE).
+My own code here is released under the [MIT License](LICENSE).
+Third-party plugins keep their own licenses (see [Credits](#-credits)).
 
 </div>

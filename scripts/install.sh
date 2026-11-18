@@ -3,6 +3,8 @@
 #   1. Backs up ~/.claude/settings.json, then merges setup/settings.json into it
 #      (objects merge, lists are combined, your other keys are kept). Needs python3.
 #   2. Adds this repo as a plugin marketplace and installs every mod in it.
+#   3. Installs the linked third-party plugins in setup/settings.json (ECC,
+#      Prismantis) from their own marketplaces.
 #
 # Usage:  bash scripts/install.sh [--skip-settings] [--skip-mods]
 set -euo pipefail
@@ -57,6 +59,21 @@ if [ "$SKIP_MODS" -eq 0 ]; then
     "$REPO/.claude-plugin/marketplace.json" | while read -r mod; do
       echo "Installing $mod..."
       claude plugin install "$mod@work-speizz"
+    done
+
+  # Linked third-party plugins (see Credits in the README): add each one's own
+  # marketplace and install it from there, straight from its author's repo.
+  python3 -I -c 'import json,sys; s=json.load(open(sys.argv[1]))
+for m in s.get("extraKnownMarketplaces", {}).values():
+    print(m["source"].get("repo") or m["source"]["url"])' "$REPO/setup/settings.json" | while read -r src; do
+      echo "Adding marketplace $src..."
+      claude plugin marketplace add "$src"
+    done
+  python3 -I -c 'import json,sys
+for k, on in json.load(open(sys.argv[1])).get("enabledPlugins", {}).items():
+    if on and not k.endswith("@work-speizz"): print(k)' "$REPO/setup/settings.json" | while read -r plugin; do
+      echo "Installing $plugin..."
+      claude plugin install "$plugin"
     done
 fi
 
