@@ -14,16 +14,16 @@ clip is a voice line turned into chiptune blips, one per syllable:
 | `voice-4` | "Ta-da! Take a look when you're ready." |
 | `voice-5` | "Back to you, partner!" |
 
-All sounds are original, synthesized by the scripts in `tools/sounds/`, and tuned
+All sounds are original, synthesized by the scripts in [`tools/sounds/`](../../tools/sounds/) (kept out of the mod, so installs don't download them), and tuned
 to be gentle: low-passed, quiet, with slow note fade-ins.
 
 ## Install
 
-```
-/plugin install done-chime --marketplace rxikou/work-speizz
-```
+See the [repo's Quick Setup](../../README.md#quick-setup), or run:
 
-Answer `y` to add the marketplace, then pick a scope.
+```bash
+claude plugin install done-chime --marketplace rxikou/work-speizz
+```
 
 ## Platforms
 
@@ -34,13 +34,14 @@ Answer `y` to add the marketplace, then pick a scope.
 ## Sound board
 
 Type `/sounds` to open an inline panel listing every sound, grouped into voice
-lines, sprite chirps and chimes.
+lines, songs, sprite chirps and chimes.
 
 | Key | Does |
 | --- | --- |
 | `↑` `↓` `←` `→` / `Tab` | Move between sounds (the first voice line starts selected) |
 | `Enter` | Play the selected sound |
 | `1`–`5` | Play a voice line straight away |
+| `6`–`7` | Play a song ("Happy Birthday", "Auld Lang Syne") |
 | `a`–`k` | Play a chirp or chime straight away |
 | `r` | Play a random voice line |
 | `q` / `Esc` | Close the panel |
@@ -50,6 +51,6 @@ You can also click any sound. While a clip plays, its name shows at the top righ
 
 ## Changing the sound
 
-Other clips live in `sounds/` (`sprite-1..4`, `chime`, `bell`, `arpeggio`, `pop`,
+Other clips live in `sounds/` (`birthday`, `new-year`, `sprite-1..4`, `chime`, `bell`, `arpeggio`, `pop`,
 `marimba`, `retro`, `whoosh-ding`). Edit `VOICES` in `hooks/register.tsx` to choose
 which ones it picks from.

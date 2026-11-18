@@ -34,8 +34,10 @@ Pair it with git's folder rules so the right identity is picked automatically:
 
 ## Install
 
-```
-/plugin install account-guard --marketplace rxikou/work-speizz
+See the [repo's Quick Setup](../../README.md#quick-setup), or run:
+
+```bash
+claude plugin install account-guard --marketplace rxikou/work-speizz
 ```
 
 ## Limits
