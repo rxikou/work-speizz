@@ -5,7 +5,12 @@
     {
       "name": "done-chime",
       "source": "./mods/done-chime",
-      "description": "A soft pixel 'sprite' chirps a random voice line whenever Claude finishes a task."
+      "description": "A soft pixel 'sprite' chirps a random voice line whenever Claude finishes a task; /sounds opens a sound board."
+    },
+    {
+      "name": "account-guard",
+      "source": "./mods/account-guard",
+      "description": "Blocks Claude's git commit/push when the git identity or login doesn't match the repo's GitHub owner."
     }
   ]
 }

@@ -18,7 +18,8 @@ settings, plus small mods that make the day-to-day smoother.
 
 | Mod | Does |
 | --- | --- |
-| [done-chime](mods/done-chime/) | A soft pixel "sprite" chirps a random voice line whenever Claude finishes a task |
+| [done-chime](mods/done-chime/) | A soft pixel "sprite" chirps a random voice line whenever Claude finishes a task; `/sounds` opens a sound board |
+| [account-guard](mods/account-guard/) | Blocks Claude's `git commit`/`push` when the identity doesn't match the repo's GitHub owner, so work and personal accounts never mix |
 
 ### Settings highlights
 
