@@ -33,9 +33,20 @@ Answer `y` to add the marketplace, then pick a scope.
 
 ## Sound board
 
-Type `/sounds` to open an inline panel listing every sound. Press `1`–`5` for the
-voice lines, `a`–`k` for the other sounds (or click one); `▶` marks what's playing,
-and `Esc` closes the panel.
+Type `/sounds` to open an inline panel listing every sound, grouped into voice
+lines, sprite chirps and chimes.
+
+| Key | Does |
+| --- | --- |
+| `↑` `↓` `←` `→` / `Tab` | Move between sounds (the first voice line starts selected) |
+| `Enter` | Play the selected sound |
+| `1`–`5` | Play a voice line straight away |
+| `a`–`k` | Play a chirp or chime straight away |
+| `r` | Play a random voice line |
+| `q` / `Esc` | Close the panel |
+
+You can also click any sound. While a clip plays, its name shows at the top right with
+`♪` and the other sounds dim.
 
 ## Changing the sound
 
