@@ -1,0 +1,6 @@
+{
+  "name": "account-guard",
+  "version": "0.1.0",
+  "description": "Blocks Claude's git commit/push when the git identity or login doesn't match the GitHub owner of the repo.",
+  "license": "MIT"
+}
