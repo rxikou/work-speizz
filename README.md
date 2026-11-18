@@ -2,9 +2,9 @@
 
 # work-speizz
 
-**My personal Claude Code arsenal of configs and workflow mods.**
+**My personal collection of Claude Code mods.**
 
-One repo to make any machine, and any project, feel like home.
+One repo to install them all on any machine.
 
 [![License: MIT](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
 [![Claude Code](https://img.shields.io/badge/Claude%20Code-plugin%20marketplace-D97757)](.claude-plugin/marketplace.json)
@@ -13,7 +13,6 @@ One repo to make any machine, and any project, feel like home.
 
 [Quick start](#-quick-start) •
 [Mods](#-mods) •
-[Settings](#%EF%B8%8F-settings-highlights) •
 [Repo layout](#-repo-layout) •
 [Add a mod](#%EF%B8%8F-add-a-new-mod) •
 [Credits](#-credits)
@@ -36,14 +35,13 @@ cd work-speizz
 
 The installer:
 
-1. **Backs up** `~/.claude/settings.json`.
-2. **Merges** [`setup/settings.json`](setup/settings.json) into it, keeping anything else you have.
-3. **Installs** every mod listed in the marketplace.
-4. **Installs** the linked third-party plugins (ECC, Prismantis, Filetree) from their authors' own marketplaces.
+1. **Installs** every mod listed in the marketplace.
+2. **Installs** the linked third-party mods in [`linked-mods.json`](linked-mods.json) (Prismantis, Filetree) from their authors' own marketplaces.
+
+It leaves your Claude Code settings alone, apart from what `claude plugin install` records.
 
 > [!TIP]
-> To run only one half, use `-SkipSettings` / `-SkipMods` on Windows or
-> `--skip-settings` / `--skip-mods` on macOS/Linux.
+> To install only my own mods, add `-SkipLinked` on Windows or `--skip-linked` on macOS/Linux.
 
 <details>
 <summary><b>Install a single mod instead</b></summary>
@@ -69,14 +67,43 @@ Answer `y` to add the marketplace, then pick a scope.
 
 Each mod's folder has its own README with setup and details.
 
-##  Settings highlights
+### Linked mods
 
--  No `Co-Authored-By: Claude` line on commits.
--  Claude may not open or merge pull requests (`gh pr create` / `gh pr merge` are denied).
--  Opus at high effort, with the [ECC](https://github.com/affaan-m/ECC) plugin.
--  [Prismantis](https://github.com/NahumLitvin/prismantis) for colorful, themeable replies (Tokyo Night theme, boxed tables, framed prompt, copy buttons).
--  [Filetree](https://github.com/data-goblin/claude-code-filetree) side pane showing the project tree with git status and the files Claude touches, in a matching Tokyo Night palette.
--  Dark daltonized theme, with notifications on.
+| Mod | What it does |
+| --- | --- |
+| [**Prismantis**](https://github.com/NahumLitvin/prismantis) | Colorful, themeable replies: tables, alerts, diagrams and copy buttons. |
+| [**Filetree**](https://github.com/data-goblin/claude-code-filetree) | IDE-style file tree pane with git status and the files Claude touches. |
+
+<details>
+<summary><b>My options for the linked mods</b></summary>
+
+<br>
+
+Tokyo Night across both. Set them from each mod's options, or paste this into
+`pluginConfigs` in `~/.claude/settings.json`:
+
+```json
+{
+  "prismantis@prismantis": {
+    "options": {
+      "theme": "tokyo-night",
+      "desktopColors": "off",
+      "tableStyle": "box",
+      "copyButtonStyle": "dim",
+      "copyButtons": true,
+      "textCopyButtons": true,
+      "promptStyle": "framed"
+    }
+  },
+  "filetree@claude-code-filetree": {
+    "options": {
+      "palette": "fg=#c0caf5 accent=#7aa2f7 muted=#737aa2 urgent=#f7768e selection=#283457 hover=#292e42 jump=#bb9af7 added=#9ece6a modified=#e0af68 renamed=#7dcfff add=#9ece6a del=#f7768e"
+    }
+  }
+}
+```
+
+</details>
 
 ##  Repo layout
 
@@ -86,7 +113,7 @@ work-speizz/
 ├── mods/                             # Claude Code mods, each a self-contained plugin
 │   ├── done-chime/
 │   └── account-guard/
-├── setup/settings.json               # baseline Claude Code settings
+├── linked-mods.json                  # third-party mods the installers pull in
 ├── scripts/                          # one-shot installers (install.ps1, install.sh)
 └── tools/sounds/                     # generators for the mods' original, synthesized sounds
 ```
@@ -108,24 +135,23 @@ work-speizz/
 
 ##  Credits
 
-This setup builds on other people's work. Third-party plugins are **linked, not
+This collection builds on other people's work. Third-party mods are **linked, not
 copied**: they install straight from their authors' repos, so their code, updates
 and licenses stay with them.
 
 | Project | Author | License | How it's used |
 | --- | --- | --- | --- |
-| [ECC](https://github.com/affaan-m/ECC) | [@affaan-m](https://github.com/affaan-m) | MIT | Linked: added as a marketplace and enabled in [`setup/settings.json`](setup/settings.json) |
-| [Prismantis](https://github.com/NahumLitvin/prismantis) | Nahum Litvin ([@NahumLitvin](https://github.com/NahumLitvin)) | MIT | Linked: colorful, themeable replies, installed from its own marketplace via [`setup/settings.json`](setup/settings.json) |
-| [Filetree](https://github.com/data-goblin/claude-code-filetree) | Kurt Buhler ([@data-goblin](https://github.com/data-goblin)) | MIT | Linked: IDE-style file tree pane, installed from its own marketplace via [`setup/settings.json`](setup/settings.json) |
+| [Prismantis](https://github.com/NahumLitvin/prismantis) | Nahum Litvin ([@NahumLitvin](https://github.com/NahumLitvin)) | MIT | Linked: colorful, themeable replies, installed from its own marketplace via [`linked-mods.json`](linked-mods.json) |
+| [Filetree](https://github.com/data-goblin/claude-code-filetree) | Kurt Buhler ([@data-goblin](https://github.com/data-goblin)) | MIT | Linked: IDE-style file tree pane, installed from its own marketplace via [`linked-mods.json`](linked-mods.json) |
 
 <details>
-<summary><b>Adding someone else's plugin</b></summary>
+<summary><b>Adding someone else's mod</b></summary>
 
 <br>
 
 1. Check its license. Without one, link to it only and never copy it in.
-2. Link it: add its marketplace to `extraKnownMarketplaces` and the plugin to
-   `enabledPlugins` in `setup/settings.json`.
+2. Link it: add `{ "plugin": "<name>@<marketplace>", "marketplace": "<owner>/<repo>" }`
+   to [`linked-mods.json`](linked-mods.json).
 3. Add a row to the table above: name, author, license, how it's used.
 4. If you ever **copy** code in instead, keep its `LICENSE` in that folder, keep the
    author in its `plugin.json`, and list it in a `THIRD_PARTY_NOTICES.md`.
@@ -137,6 +163,6 @@ and licenses stay with them.
 <div align="center">
 
 My own code here is released under the [MIT License](LICENSE).
-Third-party plugins keep their own licenses (see [Credits](#-credits)).
+Third-party mods keep their own licenses (see [Credits](#-credits)).
 
 </div>
